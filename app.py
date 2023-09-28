@@ -22,34 +22,34 @@ def buy():
     units = float(request.args.get('units', 0))
     buying_price = float(request.args.get('buying_price', 0))
 
-    share_amount = units * buying_price
-    sebon_commission = (0.015 / 100) * share_amount
+    share_amount = round(units * buying_price, 2)
+    sebon_commission = round((0.015 / 100) * share_amount, 2)
 
     if share_amount <= 50000:
-        broker_commission = max(0.004 * share_amount, 10)
+        broker_commission = round(max(0.004 * share_amount, 10), 2)
     elif 50001 <= share_amount <= 500000:
-        broker_commission = 0.0037 * share_amount
+        broker_commission = round(0.0037 * share_amount, 2)
     elif 500001 <= share_amount <= 2000000:
-        broker_commission = 0.0034 * share_amount
+        broker_commission = round(0.0034 * share_amount, 2)
     elif 2000001 <= share_amount <= 10000000:
-        broker_commission = 0.003 * share_amount
+        broker_commission = round(0.003 * share_amount, 2)
     else:
-        broker_commission = 0.0027 * share_amount
+        broker_commission = round(0.0027 * share_amount, 2)
 
     dp_fee = 25
-    total_paying_amount = share_amount + sebon_commission + broker_commission + dp_fee
-    cost_per_share = total_paying_amount / units
+    total_paying_amount = round(share_amount + sebon_commission + broker_commission + dp_fee, 2)
+    cost_per_share = round(total_paying_amount / units, 2)
 
-    response_list = [
-        {'Share Amount': share_amount},
-        {'SEBON Commission': sebon_commission},
-        {'Broker Commission': broker_commission},
-        {'DP Fee': dp_fee},
-        {'Cost Per Share': cost_per_share},
-        {'Total Paying Amount': total_paying_amount}
-    ]
+    response_dict = {
+        'Share Amount': share_amount,
+        'SEBON Commission': sebon_commission,
+        'Broker Commission': broker_commission,
+        'DP Fee': dp_fee,
+        'Cost Per Share': cost_per_share,
+        'Total Paying Amount': total_paying_amount
+    }
 
-    return jsonify(response_list)
+    return jsonify(response_dict)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
