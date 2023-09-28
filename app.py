@@ -61,7 +61,7 @@ def buy():
         price_per_share = int(price_per_share)
 
     # Calculate the total charges
-    total_charges = sebon_fee + broker_commission + dp_charge
+    total_charges = round(sebon_fee + broker_commission + dp_charge, 2)
 
     response_dict = {
         'Share Amount': share_amount,
