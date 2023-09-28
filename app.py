@@ -19,9 +19,8 @@ def add_numbers():
 
 @app.route('/buy', methods=['GET'])
 def buy():
-    data = request.get_json()
-    units = float(data.get('units', 0))
-    buying_price = float(data.get('buying_price', 0))
+    units = float(request.args.get('units', 0))
+    buying_price = float(request.args.get('buying_price', 0))
 
     share_amount = units * buying_price
     sebon_commission = (0.015 / 100) * share_amount
