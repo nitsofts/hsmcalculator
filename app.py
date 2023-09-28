@@ -17,7 +17,7 @@ def add_numbers():
 
     return jsonify(response)
 
-@app.route('/buy', methods=['POST'])
+@app.route('/buy', methods=['GET'])
 def buy():
     data = request.get_json()
     units = float(data.get('units', 0))
