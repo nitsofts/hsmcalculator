@@ -40,6 +40,22 @@ def buy():
     total_paying_amount = round(share_amount + sebon_commission + broker_commission + dp_fee, 2)
     cost_per_share = round(total_paying_amount / units, 2)
 
+    # Check if the share amount and other fields are whole numbers
+    if share_amount.is_integer():
+        share_amount = int(share_amount)
+    
+    if sebon_commission.is_integer():
+        sebon_commission = int(sebon_commission)
+    
+    if broker_commission.is_integer():
+        broker_commission = int(broker_commission)
+    
+    if total_paying_amount.is_integer():
+        total_paying_amount = int(total_paying_amount)
+    
+    if cost_per_share.is_integer():
+        cost_per_share = int(cost_per_share)
+
     response_dict = {
         'Share Amount': share_amount,
         'SEBON Commission': sebon_commission,
