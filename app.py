@@ -19,29 +19,6 @@ def add_numbers():
 
 @app.route('/buy', methods=['GET'])
 def buy():
-
-    # Check if the share amount and other fields are whole numbers
-    if share_amount.is_integer():
-        share_amount = int(share_amount)
-    
-    if sebon_fee.is_integer():
-        sebon_fee = int(sebon_fee)
-    
-    if broker_commission.is_integer():
-        broker_commission = int(broker_commission)
-    
-    if total_paying_amount.is_integer():
-        total_paying_amount = int(total_paying_amount)
-    
-    if cost_per_share.is_integer():
-        cost_per_share = int(cost_per_share)
-    
-    if price_per_share.is_integer():
-        price_per_share = int(price_per_share)
-
-    if total_charges.is_integer():
-        total_charges = int(total_charges)
-    
     units = float(request.args.get('units', 0))
     buying_price = float(request.args.get('buying_price', 0))
 
@@ -63,18 +40,26 @@ def buy():
     total_paying_amount = round(share_amount + sebon_fee + broker_commission + dp_charge, 2)
     cost_per_share = round(total_paying_amount / units, 2)
     price_per_share = round(buying_price + (broker_commission / units), 2)
-    # Calculate the total charges
     total_charges = round(sebon_fee + broker_commission + dp_charge, 2)
 
-    response_dict = {
-        'Share Amount': share_amount,
-        'Sebon Fee': sebon_fee,
-        'Broker Commission': broker_commission,
+    # Check if the share amount and other fields are whole numbers
+    share_amount_formatted = str(int(share_amount)) if share_amount.is_integer() else str(share_amount)
+    sebon_fee_formatted = str(int(sebon_fee)) if sebon_fee.is_integer() else str(sebon_fee)
+    broker_commission_formatted = str(int(broker_commission)) if broker_commission.is_integer() else str(broker_commission)
+    total_paying_amount_formatted = str(int(total_paying_amount)) if total_paying_amount.is_integer() else str(total_paying_amount)
+    cost_per_share_formatted = str(int(cost_per_share)) if cost_per_share.is_integer() else str(cost_per_share)
+    price_per_share_formatted = str(int(price_per_share)) if price_per_share.is_integer() else str(price_per_share)
+    total_charges_formatted = str(int(total_charges)) if total_charges.is_integer() else str(total_charges)
+
+    response_dict = [{
+        'Share Amount': share_amount_formatted,
+        'Sebon Fee': sebon_fee_formatted,
+        'Broker Commission': broker_commission_formatted,
         'DP Charge': dp_charge,
-        'Price Per Share': price_per_share,
-        'Total Charges': total_charges,
-        'Payable Amount': total_paying_amount
-    }
+        'Price Per Share': price_per_share_formatted,
+        'Total Charges': total_charges_formatted,
+        'Payable Amount': total_paying_amount_formatted
+    }]
 
     return jsonify(response_dict)
 
