@@ -19,6 +19,29 @@ def add_numbers():
 
 @app.route('/buy', methods=['GET'])
 def buy():
+
+    # Check if the share amount and other fields are whole numbers
+    if share_amount.is_integer():
+        share_amount = int(share_amount)
+    
+    if sebon_fee.is_integer():
+        sebon_fee = int(sebon_fee)
+    
+    if broker_commission.is_integer():
+        broker_commission = int(broker_commission)
+    
+    if total_paying_amount.is_integer():
+        total_paying_amount = int(total_paying_amount)
+    
+    if cost_per_share.is_integer():
+        cost_per_share = int(cost_per_share)
+    
+    if price_per_share.is_integer():
+        price_per_share = int(price_per_share)
+
+    if total_charges.is_integer():
+        total_charges = int(total_charges)
+    
     units = float(request.args.get('units', 0))
     buying_price = float(request.args.get('buying_price', 0))
 
@@ -42,29 +65,6 @@ def buy():
     price_per_share = round(buying_price + (broker_commission / units), 2)
     # Calculate the total charges
     total_charges = round(sebon_fee + broker_commission + dp_charge, 2)
-
-    # Check if the share amount and other fields are whole numbers
-    # if share_amount.is_integer():
-    #     share_amount = int(share_amount)
-    
-    # if sebon_fee.is_integer():
-    #     sebon_fee = int(sebon_fee)
-    
-    # if broker_commission.is_integer():
-    #     broker_commission = int(broker_commission)
-    
-    # if total_paying_amount.is_integer():
-    #     total_paying_amount = int(total_paying_amount)
-    
-    # if cost_per_share.is_integer():
-    #     cost_per_share = int(cost_per_share)
-    
-    # if price_per_share.is_integer():
-    #     price_per_share = int(price_per_share)
-
-    # if total_charges.is_integer():
-    #     total_charges = int(total_charges)
-
 
     response_dict = {
         'Share Amount': share_amount,
