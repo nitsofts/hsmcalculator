@@ -44,26 +44,26 @@ def buy():
     total_charges = round(sebon_fee + broker_commission + dp_charge, 2)
 
     # Check if the share amount and other fields are whole numbers
-    if share_amount.is_integer():
-        share_amount = int(share_amount)
+    # if share_amount.is_integer():
+    #     share_amount = int(share_amount)
     
-    if sebon_fee.is_integer():
-        sebon_fee = int(sebon_fee)
+    # if sebon_fee.is_integer():
+    #     sebon_fee = int(sebon_fee)
     
-    if broker_commission.is_integer():
-        broker_commission = int(broker_commission)
+    # if broker_commission.is_integer():
+    #     broker_commission = int(broker_commission)
     
-    if total_paying_amount.is_integer():
-        total_paying_amount = int(total_paying_amount)
+    # if total_paying_amount.is_integer():
+    #     total_paying_amount = int(total_paying_amount)
     
-    if cost_per_share.is_integer():
-        cost_per_share = int(cost_per_share)
+    # if cost_per_share.is_integer():
+    #     cost_per_share = int(cost_per_share)
     
-    if price_per_share.is_integer():
-        price_per_share = int(price_per_share)
+    # if price_per_share.is_integer():
+    #     price_per_share = int(price_per_share)
 
-    if total_charges.is_integer():
-        total_charges = int(total_charges)
+    # if total_charges.is_integer():
+    #     total_charges = int(total_charges)
 
 
     response_dict = {
