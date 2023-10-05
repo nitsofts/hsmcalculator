@@ -42,23 +42,15 @@ def buy():
     price_per_share = round(buying_price + (broker_commission / units), 2)
     total_charges = round(sebon_fee + broker_commission + dp_charge, 2)
 
-    # Check if the share amount and other fields are whole numbers
-    share_amount_formatted = str(int(share_amount)) if share_amount.is_integer() else str(share_amount)
-    sebon_fee_formatted = str(int(sebon_fee)) if sebon_fee.is_integer() else str(sebon_fee)
-    broker_commission_formatted = str(int(broker_commission)) if broker_commission.is_integer() else str(broker_commission)
-    total_paying_amount_formatted = str(int(total_paying_amount)) if total_paying_amount.is_integer() else str(total_paying_amount)
-    cost_per_share_formatted = str(int(cost_per_share)) if cost_per_share.is_integer() else str(cost_per_share)
-    price_per_share_formatted = str(int(price_per_share)) if price_per_share.is_integer() else str(price_per_share)
-    total_charges_formatted = str(int(total_charges)) if total_charges.is_integer() else str(total_charges)
 
     response_dict = [{
-        'Share Amount': share_amount_formatted,
-        'Sebon Fee': sebon_fee_formatted,
-        'Broker Commission': broker_commission_formatted,
+        'Share Amount': share_amount,
+        'Sebon Fee': sebon_fee,
+        'Broker Commission': broker_commission,
         'DP Charge': dp_charge,
-        'Price Per Share': price_per_share_formatted,
-        'Total Charges': total_charges_formatted,
-        'Payable Amount': total_paying_amount_formatted
+        'Price Per Share': price_per_share,
+        'Total Charges': total_charges,
+        'Payable Amount': total_paying_amount
     }]
 
     return jsonify(response_dict)
